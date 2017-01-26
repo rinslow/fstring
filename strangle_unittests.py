@@ -20,6 +20,6 @@ class StrangleTest(TestCase):
         y = 7
         result = 13
         expected_str = "6+7=13"
-        actual_str = str(strangle("{x}+{y}=13"))
+        actual_str = str(strangle("{x}+{y}={result}"))
 
         self.assertEqual(expected_str, actual_str)
