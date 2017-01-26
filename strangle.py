@@ -15,7 +15,7 @@ class strangle(object):
         origin (str): encapsulated string.
     """
 
-    INDICATOR_PATTERN = re.compile(r"(\{.+\}.*?)", re.MULTILINE)
+    INDICATOR_PATTERN = re.compile(r"(\{.+?\})", re.MULTILINE)
 
     def __init__(self, origin):
         self.origin = origin

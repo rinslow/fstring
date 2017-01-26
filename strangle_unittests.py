@@ -18,7 +18,8 @@ class StrangleTest(TestCase):
     def test_multi_strangle_indicator(self):
         x = 6
         y = 7
+        result = 13
         expected_str = "6+7=13"
-        actual_str = str(strangle("{x}+7=13"))
+        actual_str = str(strangle("{x}+{y}=13"))
 
         self.assertEqual(expected_str, actual_str)
