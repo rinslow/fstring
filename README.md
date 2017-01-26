@@ -12,8 +12,8 @@ Now you don't need to format your strings with %s %r or %d, or even number them 
 you can just call them by their name which makes your code so so so much more readable!
 
 instead of ```print "Hello, %s :) What a nice %s?" % (username, time_of_day)```
-how about ```python
-print strangle("Hello {username} :), What a nice {time_of_day}?")```
+
+how about ```print strangle("Hello {username} :), What a nice {time_of_day}?")```?
 
 
 Althought i gotta say the name strangle is pretty stupid, I didn't put much effort into this name. 
