@@ -23,3 +23,17 @@ class StrangleTest(TestCase):
         actual_str = str(strangle("{x}+{y}={result}"))
 
         self.assertEqual(expected_str, actual_str)
+
+    def test_dictionary_starngle(self):
+        simple_dict = {'x': '5', 'y': '10'}
+        expected_str = "5!=10"
+        actual_str = str(strangle("{simple_dict['x']}!={simple_dict['y']}"))
+        self.assertEqual(expected_str, actual_str)
+
+    def test_attribute_starngle(self):
+        test_object = type('TestObject', (object,), {})
+        foo = test_object()
+        setattr(foo, 'test', 5)
+        expected_str = "foo.test=5"
+        actual_str = str(strangle("foo.test={foo.test}"))
+        self.assertEqual(expected_str, actual_str)
