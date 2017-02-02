@@ -40,12 +40,11 @@ class strangle(object):
     def __str__(self):
         strangled = self.origin
         for match in self.INDICATOR_PATTERN.findall(strangled):
-            full_indicator = match[1:-1]
-            main_indicator = filter(None,
-                                    re.split(r"(\w+)", full_indicator))[0]
+            indicator = match[1:-1]
+            parsed_expression = filter(None, re.split(r"(\w+)", indicator))[0]
 
-            frame = self._var(main_indicator)
-            value = eval(full_indicator, None, frame)
+            frame = self._var(parsed_expression)
+            value = eval(indicator, None, frame)
             strangled = strangled.replace(match,
                                           str(value))
 
