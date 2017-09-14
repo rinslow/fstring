@@ -1,5 +1,9 @@
 # fstring
 Alows easy python usage of strings.
+
+## Usage
+```pip install fstring```
+
 ```python
 from fstring import fstring
 x = 1
