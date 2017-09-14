@@ -9,7 +9,7 @@ print fstring("{x}+{y}={plus_result}")  # Prints: 1+2.0=3.0
 ```
 Also supports evaluation
 ```python
-print fstring("1+1 is {1+1})
+print fstring("1+1 is {1+1}")
 ```
 
 
