@@ -18,5 +18,5 @@ you can just call them by their name which makes your code so so so much more re
 
 instead of ```print "Hello, %s :) What a nice %s?" % (username, time_of_day)```
 
-how about ```print strangle("Hello {username} :), What a nice {time_of_day}?")```?
+how about ```print fstring("Hello {username} :), What a nice {time_of_day}?")```?
 
