@@ -2,13 +2,13 @@ import re
 import inspect
 
 
-class strangle(object):
-    """Strangle string.
+class fstring(object):
+    """a formatted string.
 
     Usage:
         x = 6
         y = 7
-        print strangle("x is {x} and y is {y}")
+        print fstring("x is {x} and y is {y}")
         # Prints: x is 6 and y is 7
 
     Attributes:
@@ -38,14 +38,14 @@ class strangle(object):
         return frame.f_locals
 
     def __str__(self):
-        strangled = self.origin
-        for match in self.INDICATOR_PATTERN.findall(strangled):
+        fstringified = self.origin
+        for match in self.INDICATOR_PATTERN.findall(fstringified):
             indicator = match[1:-1]
             parsed_expression = filter(None, re.split(r"(\w+)", indicator))[0]
 
             frame = self._var(parsed_expression)
             value = eval(indicator, None, frame)
-            strangled = strangled.replace(match,
+            fstringified = fstringified.replace(match,
                                           str(value))
 
-        return strangled
+        return fstringified
