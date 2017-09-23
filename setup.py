@@ -2,7 +2,7 @@ from distutils.core import setup
 setup(
   name = 'fstring',
   packages = ['fstring'],
-  version = '1.1',
+  version = '1.3',
   description = 'Working with strings has never been prettier.',
   author = 'Dan Elkis',
   author_email = 'elkissdan@gmail.com',
