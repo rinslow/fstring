@@ -2,7 +2,7 @@ import re
 import inspect
 
 
-class fstring(object):
+class fstring(str):
     """a formatted string.
 
     Usage:
@@ -18,6 +18,7 @@ class fstring(object):
     INDICATOR_PATTERN = re.compile(r"(\{.+?\})", re.MULTILINE)
 
     def __init__(self, origin):
+        super(fstring, self).__init__()
         self.origin = origin
 
     def _var(self, name):
@@ -49,3 +50,33 @@ class fstring(object):
                                           str(value))
 
         return fstringified
+
+    def __eq__(self, other):
+        if type(other) is type(self):
+            return str(self) == str(other)
+
+        return str(self) == other
+
+    def __iter__(self):
+        return iter(str(self))
+
+    def __len__(self):
+        return len(str(self))
+
+    def __cmp__(self, other):
+        if type(other) is type(self):
+            return cmp(str(self), str(other))
+
+        return cmp(str(self), other)
+
+    def __getitem__(self, item):
+        return str(self)[item]
+
+    def __mod__(self, other):
+        return fstring(str(self) % other)
+
+    def __add__(self, other):
+        return fstring(str(self) + str(other))
+
+    def __repr__(self):
+        return str(self)

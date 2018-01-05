@@ -53,3 +53,45 @@ class FstringTest(TestCase):
         actual_str = str(fstring("{x==y}"))
         self.assertEqual(expected_str, actual_str)
 
+    def test_equality(self):
+        self.assertEqual(fstring("{2+2}"), "4")
+
+    def test_iteration(self):
+        expected = ["6", "1"]
+        actual = list(fstring("{60+1}"))
+        self.assertEqual(actual, expected)
+
+    def test_in(self):
+        self.assertIn("6", fstring("{66+1}"))
+
+    def test_formatting(self):
+        expected = "a = 4"
+        actual = fstring("a = %d")  % 4
+        self.assertEqual(expected, actual)
+
+    def test_sort(self):
+        arr = [fstring("a"), fstring("b"), fstring('a')]
+        actual = sorted(arr)
+        expected = [fstring("a"), fstring('a'), fstring("b")]
+        self.assertEqual(actual, expected)
+
+    def test_get_item(self):
+        self.assertEqual(fstring("44")[0], "4")
+
+    def test_len(self):
+        self.assertEqual(len(fstring("44")), 2)
+
+    def test_add_two_fstrings_together(self):
+        self.assertEqual(fstring("a") + fstring("b"), "ab")
+
+    def test_add_fstring_and_string(self):
+        self.assertEqual(fstring("a") + "b", "ab")
+
+    def add_string_and_fstring(self):
+        self.assertEqual("a" + fstring("b"), "ab")
+
+    def test_capitalize(self):
+        self.assertEqual(fstring("ab").capitalize(), "Ab")
+
+    def test_repr(self):
+        self.assertEqual(repr(fstring("{1}")), "1")
