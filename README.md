@@ -1,4 +1,7 @@
 # fstring
+[![Build Status](https://travis-ci.org/rinslow/fstring.svg?branch=master)](https://travis-ci.org/rinslow/fstring)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/fstring.svg)
+
 Alows easy python usage of strings.
 
 ## Usage
