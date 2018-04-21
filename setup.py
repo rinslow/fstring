@@ -3,7 +3,7 @@ from setuptools import setup
 setup(
     name='fstring',
     packages=['fstring'],
-    version='1.4.42',
+    version='1.5',
     description='Working with strings has never been prettier.',
     author='Dan Elkis',
     author_email='elkissdan@gmail.com',
