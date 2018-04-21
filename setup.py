@@ -4,7 +4,7 @@ from setuptools import setup
 setup(
     name='fstring',
     packages=['fstring'],
-    version='1.5',
+    version='1.6',
     description='Working with strings has never been prettier.',
     author='Dan Elkis',
     author_email='elkissdan@gmail.com',
@@ -16,7 +16,6 @@ setup(
         'License :: OSI Approved :: MIT License',
 
         'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
