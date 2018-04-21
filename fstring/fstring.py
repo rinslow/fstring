@@ -1,8 +1,21 @@
+"""PEP 498 Python 2.7 Back-port."""
 import re
 import inspect
+from platform import python_version
+
+# pylint: disable=invalid-name,missing-docstring
+def python2_cmp(a, b):
+    return (a > b) - (a < b)
+
+# pylint: disable=redefined-builtin
+if python_version().startswith("3"):
+    cmp = python2_cmp
+
+else:
+    cmp = cmp
 
 
-class fstring(str):
+class fstring(str):  # pylint: disable=invalid-name
     """a formatted string.
 
     Usage:
@@ -21,7 +34,8 @@ class fstring(str):
         super(fstring, self).__init__()
         self.origin = origin
 
-    def _var(self, name):
+    @staticmethod
+    def get_frame_by_variable_name(name):
         """Return a variable from the calling scope with a certain name.
 
         Args:
@@ -42,12 +56,13 @@ class fstring(str):
         fstringified = self.origin
         for match in self.INDICATOR_PATTERN.findall(fstringified):
             indicator = match[1:-1]
-            parsed_expression = filter(None, re.split(r"(\w+)", indicator))[0]
+            parsed_expression = next(
+                iter(filter(None, re.split(r"(\w+)", indicator)))
+            )
 
-            frame = self._var(parsed_expression)
-            value = eval(indicator, None, frame)
-            fstringified = fstringified.replace(match,
-                                          str(value))
+            frame = self.get_frame_by_variable_name(parsed_expression)
+            value = eval(indicator, None, frame)  # pylint: disable=eval-used
+            fstringified = fstringified.replace(match, str(value))
 
         return fstringified
 

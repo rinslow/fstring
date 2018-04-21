@@ -13,3 +13,5 @@ Contributors
 In chronological order:
 
 - `Amir Taboul <github.com/Amir-Taboul>`_
+- `Gregory P. Smith <github.com/gpshead>`_
+

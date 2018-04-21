@@ -1,4 +1,4 @@
-from unittest import TestCase
+from unittest import TestCase, main
 
 from fstring import fstring
 
@@ -66,7 +66,7 @@ class FstringTest(TestCase):
 
     def test_formatting(self):
         expected = "a = 4"
-        actual = fstring("a = %d")  % 4
+        actual = fstring("a = %d") % 4
         self.assertEqual(expected, actual)
 
     def test_sort(self):
@@ -95,3 +95,7 @@ class FstringTest(TestCase):
 
     def test_repr(self):
         self.assertEqual(repr(fstring("{1}")), "1")
+
+
+if __name__ == '__main__':
+    main()
