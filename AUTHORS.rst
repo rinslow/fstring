@@ -4,7 +4,7 @@ Contributions to the fstring project
 Creator & Maintainer
 --------------------
 
-- `Dan Elkis <github.com/rinslow>`_
+- `Dan Elkis <https://github.com/rinslow>`_
 
 
 Contributors
@@ -12,6 +12,6 @@ Contributors
 
 In chronological order:
 
-- `Amir Taboul <github.com/Amir-Taboul>`_
-- `Gregory P. Smith <github.com/gpshead>`_
+- `Amir Taboul <https://github.com/Amir-Taboul>`_
+- `Gregory P. Smith <https://github.com/gpshead>`_
 
