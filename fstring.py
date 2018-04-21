@@ -42,7 +42,7 @@ class fstring(str):
         fstringified = self.origin
         for match in self.INDICATOR_PATTERN.findall(fstringified):
             indicator = match[1:-1]
-            parsed_expression = filter(None, re.split(r"(\w+)", indicator))[0]
+            parsed_expression = next(iter(filter(None, re.split(r"(\w+)", indicator))))
 
             frame = self._var(parsed_expression)
             value = eval(indicator, None, frame)
