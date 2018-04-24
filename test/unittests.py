@@ -94,7 +94,7 @@ class FstringTest(TestCase):
         self.assertEqual(fstring("ab").capitalize(), "Ab")
 
     def test_repr(self):
-        self.assertEqual(repr(fstring("{1}")), "1")
+        self.assertEqual(repr(fstring("{1}")), "'1'")
 
 
 if __name__ == '__main__':
