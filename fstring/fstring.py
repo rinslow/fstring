@@ -72,30 +72,30 @@ class fstring(str):  # pylint: disable=invalid-name
 
     def __eq__(self, other):
         if type(other) is type(self):
-            return str(self) == str(other)
+            return self.s == other.s
 
-        return str(self) == other
+        return self.s == other
 
     def __iter__(self):
-        return iter(str(self))
+        return iter(self.s)
 
     def __len__(self):
-        return len(str(self))
+        return len(self.s)
 
     def __cmp__(self, other):
         if type(other) is type(self):
-            return cmp(str(self), str(other))
+            return cmp(self.s, other.s)
 
-        return cmp(str(self), other)
+        return cmp(self.s, other)
 
     def __getitem__(self, item):
-        return str(self)[item]
+        return self.s[item]
 
     def __mod__(self, other):
-        return fstring(str(self) % other)
+        return fstring(self.s % other)
 
     def __add__(self, other):
-        return fstring(str(self) + str(other))
+        return fstring(self.s + str(other))
 
     def __repr__(self):
-        return str(self)
+        return repr(self.s)
