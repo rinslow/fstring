@@ -33,6 +33,7 @@ class fstring(str):  # pylint: disable=invalid-name
     def __init__(self, origin):
         super(fstring, self).__init__()
         self.origin = origin
+        self.s = self.fstringify()
 
     @staticmethod
     def get_frame_by_variable_name(name):
@@ -52,7 +53,7 @@ class fstring(str):  # pylint: disable=invalid-name
 
         return frame.f_locals
 
-    def __str__(self):
+    def fstringify(self):
         fstringified = self.origin
         for match in self.INDICATOR_PATTERN.findall(fstringified):
             indicator = match[1:-1]
@@ -65,6 +66,9 @@ class fstring(str):  # pylint: disable=invalid-name
             fstringified = fstringified.replace(match, str(value))
 
         return fstringified
+
+    def __str__(self):
+        return self.s
 
     def __eq__(self, other):
         if type(other) is type(self):
