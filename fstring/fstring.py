@@ -4,6 +4,7 @@ import inspect
 from platform import python_version
 
 from six import text_type
+from astroid.decorators import cachedproperty
 
 # pylint: disable=invalid-name,missing-docstring
 def python2_cmp(a, b):
@@ -28,7 +29,9 @@ class fstring(text_type):  # pylint: disable=invalid-name
 
     Attributes:
         origin (text_type): encapsulated string.
-        s (text_type0): eagerly evaluated string.
+
+    Properties:
+        cached_origin (text_type): eagerly evaluated string.
     """
 
     INDICATOR_PATTERN = re.compile(r"(\{.+?\})", re.MULTILINE | re.UNICODE)
@@ -36,7 +39,10 @@ class fstring(text_type):  # pylint: disable=invalid-name
     def __init__(self, origin):
         super(fstring, self).__init__()
         self.origin = text_type(origin)
-        self.s = self.fstringify()
+
+    @cachedproperty
+    def cached_origin(self):
+        return self.fstringify()
 
     @staticmethod
     def get_frame_by_variable_name(name):
@@ -71,34 +77,34 @@ class fstring(text_type):  # pylint: disable=invalid-name
         return fstringified
 
     def __str__(self):
-        return self.s
+        return self.cached_origin
 
     def __eq__(self, other):
         if type(other) is type(self):
-            return self.s == other.s
+            return self.cached_origin == other.cached_origin
 
-        return self.s == other
+        return self.cached_origin == other
 
     def __iter__(self):
-        return iter(self.s)
+        return iter(self.cached_origin)
 
     def __len__(self):
-        return len(self.s)
+        return len(self.cached_origin)
 
     def __cmp__(self, other):
         if type(other) is type(self):
-            return cmp(self.s, other.s)
+            return cmp(self.cached_origin, other.cached_origin)
 
-        return cmp(self.s, other)
+        return cmp(self.cached_origin, other)
 
     def __getitem__(self, item):
-        return self.s[item]
+        return self.cached_origin[item]
 
     def __mod__(self, other):
-        return fstring(self.s % other)
+        return fstring(self.cached_origin % other)
 
     def __add__(self, other):
-        return fstring(self.s + text_type(other))
+        return fstring(self.cached_origin + text_type(other))
 
     def __repr__(self):
-        return text_type(repr(self.s))
+        return text_type(repr(self.cached_origin))
