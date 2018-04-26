@@ -3,6 +3,8 @@ import re
 import inspect
 from platform import python_version
 
+from six import text_type
+
 # pylint: disable=invalid-name,missing-docstring
 def python2_cmp(a, b):
     return (a > b) - (a < b)
@@ -15,7 +17,7 @@ else:
     cmp = cmp
 
 
-class fstring(str):  # pylint: disable=invalid-name
+class fstring(text_type):  # pylint: disable=invalid-name
     """a formatted string.
 
     Usage:
@@ -25,14 +27,15 @@ class fstring(str):  # pylint: disable=invalid-name
         # Prints: x is 6 and y is 7
 
     Attributes:
-        origin (str): encapsulated string.
+        origin (text_type): encapsulated string.
+        s (text_type0): eagerly evaluated string.
     """
 
-    INDICATOR_PATTERN = re.compile(r"(\{.+?\})", re.MULTILINE)
+    INDICATOR_PATTERN = re.compile(r"(\{.+?\})", re.MULTILINE | re.UNICODE)
 
     def __init__(self, origin):
         super(fstring, self).__init__()
-        self.origin = origin
+        self.origin = text_type(origin)
         self.s = self.fstringify()
 
     @staticmethod
@@ -63,7 +66,7 @@ class fstring(str):  # pylint: disable=invalid-name
 
             frame = self.get_frame_by_variable_name(parsed_expression)
             value = eval(indicator, None, frame)  # pylint: disable=eval-used
-            fstringified = fstringified.replace(match, str(value))
+            fstringified = fstringified.replace(match, text_type(value))
 
         return fstringified
 
@@ -95,7 +98,7 @@ class fstring(str):  # pylint: disable=invalid-name
         return fstring(self.s % other)
 
     def __add__(self, other):
-        return fstring(self.s + str(other))
+        return fstring(self.s + text_type(other))
 
     def __repr__(self):
-        return repr(self.s)
+        return text_type(repr(self.s))

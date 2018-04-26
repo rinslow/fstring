@@ -1,4 +1,5 @@
-from unittest import TestCase, main
+from platform import python_version
+from unittest import TestCase, main, skipIf, skipUnless
 
 from fstring import fstring
 
@@ -93,8 +94,13 @@ class FstringTest(TestCase):
     def test_capitalize(self):
         self.assertEqual(fstring("ab").capitalize(), "Ab")
 
-    def test_repr(self):
-        self.assertEqual(repr(fstring("{1}")), "'1'")
+    @skipIf(python_version().startswith("3"), "Python 3 repr() has no 'u'")
+    def test_repr_python2(self):
+        self.assertEqual(repr(fstring("{u'1'}")), "u'1'")
+
+    @skipIf(python_version().startswith("2"), "Python 2 repr() has 'u' prefix")
+    def test_repr_python3(self):
+        self.assertEqual(repr(fstring("{'1'}")), "'1'")
 
     def test_fstring_evaluates_eagerly(self):
         a = 4
@@ -102,6 +108,14 @@ class FstringTest(TestCase):
         self.assertEqual(b, "4")
         a = 5
         self.assertEqual(b, "4")
+
+    @skipIf(python_version().startswith("3"), reason="No unicode in Python 3")
+    def test_fstring_returns_unicode_strings(self):
+        self.assertIsInstance(fstring("{1}"), unicode)
+
+    def test_fstring_is_not_bytes(self):
+        self.assertNotIsInstance(fstring("{1}"), bytes)
+
 
 if __name__ == '__main__':
     main()
