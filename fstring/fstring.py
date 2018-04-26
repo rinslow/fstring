@@ -108,3 +108,6 @@ class fstring(text_type):  # pylint: disable=invalid-name
 
     def __repr__(self):
         return text_type(repr(self.cached_origin))
+
+    def __hash__(self):
+        return hash(self.cached_origin)

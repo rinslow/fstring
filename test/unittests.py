@@ -116,6 +116,11 @@ class FstringTest(TestCase):
     def test_fstring_is_not_bytes(self):
         self.assertNotIsInstance(fstring("{1}"), bytes)
 
+    def test_fstring_as_key_in_a_dict(self):
+        dictionary = {fstring("a"): 4}
+        self.assertIn(fstring("a"), dictionary)
+        self.assertIn("a", dictionary)
+        self.assertEqual(dictionary[fstring("a")], 4)
 
 if __name__ == '__main__':
     main()
