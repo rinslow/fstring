@@ -96,6 +96,12 @@ class FstringTest(TestCase):
     def test_repr(self):
         self.assertEqual(repr(fstring("{1}")), "'1'")
 
+    def test_fstring_evaluates_eagerly(self):
+        a = 4
+        b = fstring("{a}")
+        self.assertEqual(b, "4")
+        a = 5
+        self.assertEqual(b, "4")
 
 if __name__ == '__main__':
     main()
