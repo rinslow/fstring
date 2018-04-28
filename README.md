@@ -3,7 +3,7 @@
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/fstring.svg)
 [![PyPI version](https://badge.fury.io/py/fstring.svg)](https://badge.fury.io/py/fstring)
 
-## [PEP498](https://www.python.org/dev/peps/pep-0498/) Backport for all supported Python versions.
+# [PEP498](https://www.python.org/dev/peps/pep-0498/) Backport for all supported Python versions.
 
 ## Usage
 ```pip install fstring```
