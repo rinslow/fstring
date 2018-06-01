@@ -120,14 +120,15 @@ class FstringTest(TestCase):
         assert dictionary[f("a")] == 4
 
 
-@expectedFailure
 class DoubleBracesCase(TestCase):
     def test_double_braces_are_not_tokenized(self):
         assert f("{{}}") == "{}"
 
     def test_tokens_within_double_braces_are_tokenized(self):
-        assert f("{{{4*10}}") == "{40}"
+        assert f("{{{4*10}}}") == u"{40}"
 
+    def test_tokens_near_double_braces_are_tokenized_as_well(self):
+        assert f("{{{4*10}}}{4}") == "{40}4"
 
 @expectedFailure
 class TypeConversionCase(TestCase):

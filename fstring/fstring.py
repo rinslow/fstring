@@ -63,7 +63,11 @@ class fstring(text_type):  # pylint: disable=invalid-name
         return frame.f_locals
 
     def fstringify(self):
-        fstringified = self.origin
+        # This is a really dirty hack that I need to find a better, cleaner,
+        # more stable and better performance solution for.
+        fstringified = re.sub(r"(?:{{)+?", "\x15", self.origin)[::-1]
+        fstringified = re.sub(r"(?:}})+?", "\x16", fstringified)[::-1]
+
         for match in self.INDICATOR_PATTERN.findall(fstringified):
             indicator = match[1:-1]
             parsed_expression = next(
@@ -74,7 +78,7 @@ class fstring(text_type):  # pylint: disable=invalid-name
             value = eval(indicator, None, frame)  # pylint: disable=eval-used
             fstringified = fstringified.replace(match, text_type(value))
 
-        return fstringified
+        return fstringified.replace("\x15", "{").replace("\x16", "}")
 
     def __str__(self):
         return self.cached_origin
