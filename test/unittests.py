@@ -89,6 +89,9 @@ class FstringTest(TestCase):
     def test_add_fstring_and_string(self):
         self.assertEqual(f("a") + "b", "ab")
 
+    def test_add_string_and_fstring(self):
+        self.assertEqual("b" + f("{1+1}"), "b2")
+
     def add_string_and_fstring(self):
         self.assertEqual("a" + f("b"), "ab")
 

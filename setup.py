@@ -4,7 +4,7 @@ from setuptools import setup
 setup(
     name='fstring',
     packages=['fstring'],
-    version='1.7',
+    version='1.7.1',
     description='Working with strings has never been prettier.',
     author='Dan Elkis',
     author_email='elkissdan@gmail.com',
