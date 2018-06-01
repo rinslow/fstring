@@ -160,18 +160,21 @@ class TypeConversionCase(TestCase):
         assert f("{Stub()!s}") == "Stub"
 
 
-@expectedFailure
 class UnbalancedBracesCase(TestCase):
     def test_method(self):
         with self.assertRaises(SyntaxError):
-            f("{{}")
+            str(f("{{}"))
 
         # Unbalanced Double braces should not raise a SyntaxError
         try:
-            f("{{}}}}")
+            str(f("{{}}}}"))
 
         except SyntaxError:
             self.fail()
+
+    def test_no_empty_fstring_allowed(self):
+        with self.assertRaises(SyntaxError):
+            str(f("{}"))
 
 
 @expectedFailure

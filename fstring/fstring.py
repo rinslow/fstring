@@ -34,7 +34,7 @@ class fstring(text_type):  # pylint: disable=invalid-name
         cached_origin (text_type): eagerly evaluated string.
     """
 
-    INDICATOR_PATTERN = re.compile(r"(\{.+?\})", re.MULTILINE | re.UNICODE)
+    INDICATOR_PATTERN = re.compile(r"(\{[^{}]+?\})", re.MULTILINE | re.UNICODE)
 
     def __init__(self, origin):
         super(fstring, self).__init__()
@@ -67,6 +67,19 @@ class fstring(text_type):  # pylint: disable=invalid-name
         # more stable and better performance solution for.
         fstringified = re.sub(r"(?:{{)+?", "\x15", self.origin)[::-1]
         fstringified = re.sub(r"(?:}})+?", "\x16", fstringified)[::-1]
+
+        if "{}" in fstringified:
+            raise SyntaxError("fstring: empty expression not allowed")
+
+        offset = 0
+        for char in fstringified:
+            if char == "{":
+                offset += 1
+            elif char == "}":
+                offset -= 1
+
+        if offset != 0:
+            raise SyntaxError("f-string: unbalanced curly braces'")
 
         for match in self.INDICATOR_PATTERN.findall(fstringified):
             indicator = match[1:-1]
@@ -111,7 +124,14 @@ class fstring(text_type):  # pylint: disable=invalid-name
         return fstring(self.cached_origin + text_type(other))
 
     def __repr__(self):
-        return text_type(repr(self.cached_origin))
+        try:
+            origin = self.cached_origin
+
+        except SyntaxError:
+            return "SyntaxError: fstring: empty expression not allowed"
+
+        return text_type(repr(origin))
+
 
     def __hash__(self):
         return hash(self.cached_origin)
