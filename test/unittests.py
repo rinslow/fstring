@@ -1,4 +1,5 @@
 import decimal
+import textwrap
 from platform import python_version
 from unittest import TestCase, main, skipIf, expectedFailure
 
@@ -92,9 +93,6 @@ class FstringTest(TestCase):
     def test_add_string_and_fstring(self):
         self.assertEqual("b" + f("{1+1}"), "b2")
 
-    def add_string_and_fstring(self):
-        self.assertEqual("a" + f("b"), "ab")
-
     def test_capitalize(self):
         self.assertEqual(f("ab").capitalize(), "Ab")
 
@@ -177,16 +175,23 @@ class UnbalancedBracesCase(TestCase):
             str(f("{}"))
 
 
-@expectedFailure
 class NewLinesWithinFstringCase(TestCase):
     def test_new_lines(self):
         x = 0
-        assert f('''{x
-        +1}''') == "2"
+        self.assertEqual(f('''{x
+        +1}'''), "1")
 
         d = {0: 'zero'}
         assert f('''{d[0
 ]}''') == 'zero'
+
+    def test_newline_strings_are_acceptable(self):
+        assert f('''{1+1}
+{2+2}''') == '2\n4'
+
+    def test_newline_strings_within_fstring_are_okay(self):
+        assert f('''{"""a
+b"""}''') == "a\nb"
 
 
 @expectedFailure

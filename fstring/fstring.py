@@ -86,9 +86,15 @@ class fstring(text_type):  # pylint: disable=invalid-name
             parsed_expression = next(
                 iter(filter(None, re.split(r"(\w+)", indicator)))
             )
-
             frame = self.get_frame_by_variable_name(parsed_expression)
-            value = eval(indicator, None, frame)  # pylint: disable=eval-used
+            try:
+                value = eval(indicator, None, frame)  # pylint: disable=eval-used
+
+            except SyntaxError:  # This is to handle a multi-line string.
+                                 # Once again, this is a dirty hack. I need to
+                                 # Re-implement this using format()
+                value = eval(indicator.replace("\n", ""), None, frame)  # pylint: disable=eval-used
+
             fstringified = fstringified.replace(match, text_type(value))
 
         return fstringified.replace("\x15", "{").replace("\x16", "}")
