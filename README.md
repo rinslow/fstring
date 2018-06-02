@@ -3,7 +3,6 @@
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/fstring.svg)
 [![PyPI version](https://badge.fury.io/py/fstring.svg)](https://badge.fury.io/py/fstring)
 
-\
 ![WTFPL License](http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-1.png "Do what the fuck you want license")
 
 
