@@ -10,7 +10,7 @@ setup(
     author_email='elkissdan@gmail.com',
     license='MIT',
     zip_safe=False,
-    url='https://github.com/d-kiss/fstring',
+    url='https://github.com/rinslow/fstring',
     keywords=['string', 'fstring', 'formatting', 'inline', 'evaluation'],
     classifiers=[
         "License :: OSI Approved :: MIT License",
