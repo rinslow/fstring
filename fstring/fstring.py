@@ -4,7 +4,7 @@ import inspect
 from platform import python_version
 
 from six import text_type
-from astroid.decorators import cachedproperty
+from cached_property import cached_property
 
 # pylint: disable=invalid-name,missing-docstring
 def python2_cmp(a, b):
@@ -40,7 +40,7 @@ class fstring(text_type):  # pylint: disable=invalid-name
         super(fstring, self).__init__()
         self.origin = text_type(origin)
 
-    @cachedproperty
+    @cached_property
     def cached_origin(self):
         return self.fstringify()
 
