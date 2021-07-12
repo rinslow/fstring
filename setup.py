@@ -6,6 +6,7 @@ setup(
     packages=['fstring'],
     version='1.7.5',
     description='Working with strings has never been prettier.',
+    long_description=open("README.md", "rt").read(),
     author='Dan Elkis',
     author_email='elkissdan@gmail.com',
     license='MIT',
