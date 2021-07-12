@@ -4,12 +4,13 @@ from setuptools import setup
 setup(
     name='fstring',
     packages=['fstring'],
-    version='1.7.4',
+    version='1.7.5',
     description='Working with strings has never been prettier.',
     author='Dan Elkis',
     author_email='elkissdan@gmail.com',
     license='MIT',
     zip_safe=False,
+    install_requires=['astroid'],
     url='https://github.com/d-kiss/fstring',
     keywords=['string', 'fstring', 'formatting', 'inline', 'evaluation'],
     classifiers=[
