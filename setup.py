@@ -12,7 +12,7 @@ setup(
     license='MIT',
     zip_safe=False,
     install_requires=['astroid'],
-    url='https://github.com/d-kiss/fstring',
+    url='https://github.com/rinslow/fstring',
     keywords=['string', 'fstring', 'formatting', 'inline', 'evaluation'],
     classifiers=[
         "License :: OSI Approved :: MIT License",
